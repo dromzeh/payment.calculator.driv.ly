@@ -1,9 +1,12 @@
 name: Check formatting
 
 on:
+    pull_request:
+        branches:
+            - '*'
     push:
         branches:
-            - 'next'
+            - '*'
 
 concurrency:
     group: ${{ github.job }}-${{ github.ref }}
