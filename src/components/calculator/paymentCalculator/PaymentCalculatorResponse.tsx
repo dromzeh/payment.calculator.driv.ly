@@ -17,23 +17,49 @@ import {
 } from '@/components/ui/table'
 import { useFormatPrice as formatPrice } from '@/lib/helpers/formatPrice'
 import { PaymentCalculatorProps } from '@/lib/interfaces/PaymentCalculatorProps'
-import { useState, useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useReducer } from 'react'
 import { useRouter } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
+
+const initialState = {
+    loanAmount: 25000,
+    monthlyPayment: 500,
+    totalTaxesAndFees: 500,
+    salesTax: 0,
+    fees: 0,
+}
+
+type Action = {
+    type: string;
+    payload: any;
+}
+
+const reducer = (state: any, action: Action) => {
+    switch (action.type) {
+        case 'setLoanAmount':
+            return { ...state, loanAmount: action.payload }
+        case 'setMonthlyPayment':
+            return { ...state, monthlyPayment: action.payload }
+        case 'setTotalTaxesAndFees':
+            return { ...state, totalTaxesAndFees: action.payload }
+        case 'setSalesTax':
+            return { ...state, salesTax: action.payload }
+        case 'setFees':
+            return { ...state, fees: action.payload }
+        default:
+            throw new Error()
+    }
+}
 
 export default function PaymentHandlerResponse({
     selectedTab,
 }: PaymentCalculatorProps) {
+    const [state, dispatch] = useReducer(reducer, initialState)
+
     const form = useFormContext()
     const router = useRouter()
 
     const watch = useMemo(() => form.watch(), [form])
-
-    const [loanAmount, setLoanAmount] = useState(0)
-    const [monthlyPayment, setMonthlyPayment] = useState(0)
-    const [totalTaxesAndFees, setTotalTaxesAndFees] = useState(0)
-    const [salesTax, setSalesTax] = useState(0)
-    const [fees, setFees] = useState(0)
 
     useEffect(() => {
         let timeoutId: NodeJS.Timeout | null = null
@@ -52,19 +78,31 @@ export default function PaymentHandlerResponse({
                         if (!data.paymentsData) {
                             throw new Error('No payments data')
                         }
-                        setLoanAmount(data.paymentsData.loanAmount)
-                        setMonthlyPayment(
-                            data.paymentsData.loanMonthlyPaymentWithTaxes,
-                        )
-                        setTotalTaxesAndFees(
-                            data.paymentsData.totalTaxesAndFees,
-                        )
-                        setSalesTax(data.paymentsData.taxes.combinedSalesTax)
-                        setFees(data.paymentsData.fees.combinedFees)
+                        dispatch({
+                            type: 'setLoanAmount',
+                            payload: data.paymentsData.loanAmount,
+                        })
+                        dispatch({
+                            type: 'setMonthlyPayment',
+                            payload: data.paymentsData.loanMonthlyPaymentWithTaxes,
+                        })
+                        dispatch({
+                            type: 'setTotalTaxesAndFees',
+                            payload: data.paymentsData.totalTaxesAndFees,
+                        })
+                        dispatch({
+                            type: 'setSalesTax',
+                            payload: data.paymentsData.taxes.combinedSalesTax,
+                        })
+                        dispatch({
+                            type: 'setFees',
+                            payload: data.paymentsData.fees.combinedFees
+                        })
                     })
                     .catch((error) =>
                         console.error('Error fetching payments data', error),
                     ) 
+
                     
             }, 500)
         } else {
@@ -75,12 +113,27 @@ export default function PaymentHandlerResponse({
                 (1 + interest)
             const calculatedMonthlyPayment =
                 calculatedLoanAmount / watch.loanTerm
+            dispatch({
+                type: 'setLoanAmount',
+                payload: calculatedLoanAmount,
+            })
+            dispatch({
+                type: 'setMonthlyPayment',
+                payload: calculatedMonthlyPayment,
+            })
+            dispatch({
+                type: 'setTotalTaxesAndFees',
+                payload: 0,
+            })
+            dispatch({
+                type: 'setSalesTax',
+                payload: 0,
+            })
+            dispatch({
+                type: 'setFees',
+                payload: 0,
+            })
 
-            setLoanAmount(calculatedLoanAmount)
-            setMonthlyPayment(calculatedMonthlyPayment)
-            setTotalTaxesAndFees(0)
-            setSalesTax(0)
-            setFees(0)
         }
 
         return () => {
@@ -100,8 +153,8 @@ export default function PaymentHandlerResponse({
                 </CardDescription>
                 <CardTitle>
                     {selectedTab === 'monthlyPayment'
-                        ? formatPrice(monthlyPayment)
-                        : formatPrice(loanAmount)}
+                        ? formatPrice(state.monthlyPayment)
+                        : formatPrice(state.loanAmount)}
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -111,31 +164,31 @@ export default function PaymentHandlerResponse({
                             <TableCell className="font-medium">
                                 Loan Amount
                             </TableCell>
-                            <TableCell>{formatPrice(loanAmount)}</TableCell>
+                            <TableCell>{formatPrice(state.loanAmount)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">
                                 Monthly Payment
                             </TableCell>
-                            <TableCell>{formatPrice(monthlyPayment)}</TableCell>
+                            <TableCell>{formatPrice(state.monthlyPayment)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">
                                 Total Taxes and Fees
                             </TableCell>
                             <TableCell>
-                                {formatPrice(totalTaxesAndFees)}
+                                {formatPrice(state.totalTaxesAndFees)}
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">
                                 Sales Tax
                             </TableCell>
-                            <TableCell>{formatPrice(salesTax)}</TableCell>
+                            <TableCell>{formatPrice(state.salesTax)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">Fees</TableCell>
-                            <TableCell>{formatPrice(fees)}</TableCell>
+                            <TableCell>{formatPrice(state.fees)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
