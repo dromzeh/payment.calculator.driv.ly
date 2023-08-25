@@ -12,10 +12,7 @@ import GetPreApproved from '@/components/navigation/GetPreApproved'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableHead,
-    TableHeader,
     TableRow,
 } from '@/components/ui/table'
 import { useFormatPrice as formatPrice } from '@/lib/helpers/formatPrice'
