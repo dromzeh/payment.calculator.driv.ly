@@ -25,7 +25,6 @@ import { PaymentCalculatorProps } from '@/lib/interfaces/PaymentCalculatorProps'
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
-import DecryptionTextEffect from '@/components/textEffects/decryptedText'
 
 export default function PaymentHandlerResponse({
     selectedTab,
@@ -69,9 +68,10 @@ export default function PaymentHandlerResponse({
                     .catch((error) => console.log(error))
             }, 500)
         } else {
-            // calculate the values
+            const interest = 0.05
             const calculatedLoanAmount =
-                watch.vehiclePrice - watch.downPayment - watch.tradeInValue
+                (watch.vehiclePrice - watch.downPayment - watch.tradeInValue) *
+                (1 + interest)
             const calculatedMonthlyPayment =
                 calculatedLoanAmount / watch.loanTerm
 

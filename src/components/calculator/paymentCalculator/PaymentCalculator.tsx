@@ -3,7 +3,6 @@ import { useSearchParams } from 'next/navigation'
 import PaymentHandlerResponse from './PaymentCalculatorResponse'
 import VehicleDetailsForm from './VehicleDetailsForm'
 import { PaymentCalculatorProps } from '@/lib/interfaces/PaymentCalculatorProps'
-import { useState, useEffect } from 'react'
 import { useForm, FormProvider, useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,10 +16,10 @@ const FormSchema = z.object({
     vehiclePrice: z
         .number()
         .min(0, 'Vehicle price is required')
-        .max(100000)
+        .max(20000)
         .default(25000),
-    downPayment: z.number().min(0).max(100000).default(500),
-    tradeInValue: z.number().min(0).max(100000).default(2000),
+    downPayment: z.number().min(0).max(20000).default(500),
+    tradeInValue: z.number().min(0).max(20000).default(2000),
     creditScore: z.number().min(300).max(800).default(675),
     loanTerm: z.number().min(12).max(84).default(36),
     zip: z

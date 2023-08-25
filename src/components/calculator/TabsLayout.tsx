@@ -1,12 +1,12 @@
 'use client'
 
 import PaymentHandler from './paymentCalculator/PaymentCalculator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useState } from 'react'
 
 type TabValue = 'monthlyPayment' | 'vehiclePrice'
 
-export function TabsDemo() {
+export function TabsLayout() {
     const [selectedTab, setSelectedTab] = useState<TabValue>('monthlyPayment')
 
     return (

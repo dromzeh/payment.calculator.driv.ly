@@ -1,4 +1,4 @@
-import { TabsDemo } from '@/components/calculator/Tabs'
+import { TabsLayout } from '@/components/calculator/TabsLayout'
 import Hero from '@/components/main/Hero'
 import { Metadata } from 'next'
 
@@ -33,7 +33,7 @@ export default function Home() {
         <main className="flex h-screen flex-col py-10">
             <Hero />
             <div className="flex flex-row justify-center">
-                <TabsDemo />
+                <TabsLayout />
             </div>
         </main>
     )
