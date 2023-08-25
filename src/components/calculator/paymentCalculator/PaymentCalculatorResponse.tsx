@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Card,
     CardContent,
@@ -6,9 +8,6 @@ import {
     CardHeader,
     CardDescription,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 import GetPreApproved from '@/components/navigation/GetPreApproved'
 import {
     Table,
@@ -20,7 +19,6 @@ import {
     TableRow,
 } from '@/components/ui/table'
 import { useFormatPrice as formatPrice } from '@/lib/helpers/formatPrice'
-import { motion } from 'framer-motion'
 import { PaymentCalculatorProps } from '@/lib/interfaces/PaymentCalculatorProps'
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -43,18 +41,20 @@ export default function PaymentHandlerResponse({
     useEffect(() => {
         let timeoutId: NodeJS.Timeout | null = null
 
-        // if we have a vin, make request to https://payments.vin/3TYSZ5AN8PT104981?downPayment=5000&creditScore=675&zip=98164
+        // if we have a vin, make request to https://payments.vin/3TYSZ5AN8PT104981?downPayment=5000&creditScore=675&zip=98164&term=36
         // and set the values, else calculate them
         if (watch.vin && watch.vin.length === 17) {
             router.push(`?vin=${watch.vin}`)
 
             timeoutId = setTimeout(() => {
-                const paymentsVinApiURL = `https://payments.vin/${watch.vin}?downPayment=${watch.downPayment}&creditScore=${watch.creditScore}&zip=${watch.zip}&tradeIn=${watch.tradeInValue}`
+                const paymentsVinApiURL = `https://payments.vin/${watch.vin}?downPayment=${watch.downPayment}&creditScore=${watch.creditScore}&zip=${watch.zip}&tradeIn=${watch.tradeInValue}&term=${watch.loanTerm}`
 
                 fetch(paymentsVinApiURL, { next: { revalidate: 3600 } }) // revalidate every 5 minutes
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data.paymentsData)
+                        if (!data.paymentsData) {
+                            throw new Error('No payments data')
+                        }
                         setLoanAmount(data.paymentsData.loanAmount)
                         setMonthlyPayment(
                             data.paymentsData.loanMonthlyPaymentWithTaxes,
@@ -65,9 +65,13 @@ export default function PaymentHandlerResponse({
                         setSalesTax(data.paymentsData.taxes.combinedSalesTax)
                         setFees(data.paymentsData.fees.combinedFees)
                     })
-                    .catch((error) => console.log(error))
+                    .catch((error) =>
+                        console.error('Error fetching payments data', error),
+                    ) 
+                    
             }, 500)
         } else {
+            router.push('/')
             const interest = 0.05
             const calculatedLoanAmount =
                 (watch.vehiclePrice - watch.downPayment - watch.tradeInValue) *

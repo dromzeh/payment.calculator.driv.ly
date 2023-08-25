@@ -53,34 +53,6 @@ const monthlyTermOptions = {
     84: '84 months',
 }
 
-//  doesn't work because of CORS:
-
-// if (watch.vin && watch.vin.includes('carmax.com/car/')) {
-//     getVINfromCarmax(watch.vin).then((vin) => {
-//         if (vin) {
-//             console.log(vin)
-//             form.setValue('vin', vin)
-//         }
-//     })
-// }
-// export function getVINfromCarmax(url: string): Promise<string | undefined> {
-//     // scrape page to find 4th occurence of classname: stock-and-vin-text
-//     // return the textContent of the 4th occurence
-//     // https://www.carmax.com/car/24753268 returns 2T1BURHE6EC174735
-//     return fetch(url)
-//         .then((response) => response.text())
-//         .then((html) => {
-//             const parser = new DOMParser();
-//             const doc = parser.parseFromString(html, "text/html");
-//             const vin = doc.getElementsByClassName('stock-and-vin-text')[3].textContent ?? undefined;
-//             return vin;
-//         })
-//         .catch((error) => {
-//             console.warn(error);
-//             return undefined;
-//     });
-// }
-
 export default function VehicleDetailsForm() {
     const form = useFormContext()
     const watch = form.watch()
@@ -98,7 +70,7 @@ export default function VehicleDetailsForm() {
                                         name="vin"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>
+                                                <FormLabel id="vin">
                                                     <div className="flex justify-between">
                                                         <div className="flex items-center">
                                                             <CarFront className="mr-2" />
@@ -326,7 +298,7 @@ export default function VehicleDetailsForm() {
                                 name="loanTerm"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="flex items-center font-semibold">
+                                        <FormLabel className="flex items-center font-semibold" id="loanTerm">
                                             <CalendarRange className="mr-2" />
                                             Loan Term
                                         </FormLabel>
@@ -375,7 +347,7 @@ export default function VehicleDetailsForm() {
                                 name="creditScore"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="flex items-center font-semibold">
+                                        <FormLabel className="flex items-center font-semibold" id="creditScore">
                                             <Gauge className="mr-2" />
                                             Credit Score
                                         </FormLabel>
