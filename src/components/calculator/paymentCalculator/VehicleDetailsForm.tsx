@@ -6,7 +6,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
+    FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
@@ -19,7 +19,7 @@ import {
     Receipt,
     HeartHandshake,
     MapPin,
-    CalendarRange,
+    CalendarRange
 } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import {
@@ -29,12 +29,12 @@ import {
     SelectItem,
     SelectLabel,
     SelectTrigger,
-    SelectValue,
+    SelectValue
 } from '@/components/ui/select'
 import {
     Popover,
     PopoverContent,
-    PopoverTrigger,
+    PopoverTrigger
 } from '@/components/ui/popover'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -42,7 +42,7 @@ const creditScoreOptions = {
     625: '625 (Fair)',
     675: '675 (Good)',
     725: '725 (Very Good)',
-    800: '800 (Excellent)',
+    800: '800 (Excellent)'
 }
 
 const monthlyTermOptions = {
@@ -50,7 +50,7 @@ const monthlyTermOptions = {
     48: '48 months',
     60: '60 months',
     72: '72 months',
-    84: '84 months',
+    84: '84 months'
 }
 
 export default function VehicleDetailsForm() {
@@ -86,7 +86,7 @@ export default function VehicleDetailsForm() {
                                                                 <Popover>
                                                                     <PopoverTrigger className="ml-1 hover:underline">
                                                                         {form.watch(
-                                                                            'zip',
+                                                                            'zip'
                                                                         )}
                                                                     </PopoverTrigger>
                                                                     <PopoverContent>
@@ -104,7 +104,7 @@ export default function VehicleDetailsForm() {
                                                                             placeholder="98164"
                                                                             className="w-full bg-muted"
                                                                             {...form.register(
-                                                                                'zip',
+                                                                                'zip'
                                                                             )}
                                                                         />
                                                                     </PopoverContent>
@@ -180,7 +180,7 @@ export default function VehicleDetailsForm() {
                                                 onValueChange={(value) => {
                                                     form.setValue(
                                                         'vehiclePrice',
-                                                        value[0],
+                                                        value[0]
                                                     )
                                                 }}
                                             />
@@ -229,7 +229,7 @@ export default function VehicleDetailsForm() {
                                             onValueChange={(value) => {
                                                 form.setValue(
                                                     'downPayment',
-                                                    value[0],
+                                                    value[0]
                                                 )
                                             }}
                                         />
@@ -269,14 +269,14 @@ export default function VehicleDetailsForm() {
                                         <Slider
                                             id="tradeInValue"
                                             defaultValue={[
-                                                form.getValues('tradeInValue'),
+                                                form.getValues('tradeInValue')
                                             ]}
                                             max={20000}
                                             step={500}
                                             onValueChange={(value) => {
                                                 form.setValue(
                                                     'tradeInValue',
-                                                    value[0],
+                                                    value[0]
                                                 )
                                             }}
                                         />
@@ -298,7 +298,9 @@ export default function VehicleDetailsForm() {
                                 name="loanTerm"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="flex items-center font-semibold" id="loanTerm">
+                                        <FormLabel
+                                            className="flex items-center font-semibold"
+                                            id="loanTerm">
                                             <CalendarRange className="mr-2" />
                                             Loan Term
                                         </FormLabel>
@@ -307,7 +309,7 @@ export default function VehicleDetailsForm() {
                                                 onValueChange={(value) => {
                                                     form.setValue(
                                                         'loanTerm',
-                                                        parseInt(value),
+                                                        parseInt(value)
                                                     )
                                                 }}
                                                 defaultValue={field.value.toString()}>
@@ -323,7 +325,7 @@ export default function VehicleDetailsForm() {
                                                             Loan Term
                                                         </SelectLabel>
                                                         {Object.entries(
-                                                            monthlyTermOptions,
+                                                            monthlyTermOptions
                                                         ).map(
                                                             ([key, value]) => (
                                                                 <SelectItem
@@ -331,7 +333,7 @@ export default function VehicleDetailsForm() {
                                                                     value={key}>
                                                                     {value}
                                                                 </SelectItem>
-                                                            ),
+                                                            )
                                                         )}
                                                     </SelectGroup>
                                                 </SelectContent>
@@ -347,7 +349,9 @@ export default function VehicleDetailsForm() {
                                 name="creditScore"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="flex items-center font-semibold" id="creditScore">
+                                        <FormLabel
+                                            className="flex items-center font-semibold"
+                                            id="creditScore">
                                             <Gauge className="mr-2" />
                                             Credit Score
                                         </FormLabel>
@@ -356,7 +360,7 @@ export default function VehicleDetailsForm() {
                                                 onValueChange={(value) => {
                                                     form.setValue(
                                                         'creditScore',
-                                                        parseInt(value),
+                                                        parseInt(value)
                                                     )
                                                 }}
                                                 defaultValue={field.value.toString()}>
@@ -372,7 +376,7 @@ export default function VehicleDetailsForm() {
                                                             Credit Score
                                                         </SelectLabel>
                                                         {Object.entries(
-                                                            creditScoreOptions,
+                                                            creditScoreOptions
                                                         ).map(
                                                             ([key, value]) => (
                                                                 <SelectItem
@@ -380,7 +384,7 @@ export default function VehicleDetailsForm() {
                                                                     value={key}>
                                                                     {value}
                                                                 </SelectItem>
-                                                            ),
+                                                            )
                                                         )}
                                                     </SelectGroup>
                                                 </SelectContent>

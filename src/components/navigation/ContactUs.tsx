@@ -13,7 +13,7 @@ export default function ContactUs() {
                 onClick={() => {
                     window.open(
                         'https://drivly.typeform.com/to/nqwus8kr/',
-                        '_blank',
+                        '_blank'
                     )
                 }}
                 onMouseEnter={() => setIsHovered(true)}

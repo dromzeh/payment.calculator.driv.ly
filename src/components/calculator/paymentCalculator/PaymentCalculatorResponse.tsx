@@ -6,15 +6,10 @@ import {
     CardFooter,
     CardTitle,
     CardHeader,
-    CardDescription,
+    CardDescription
 } from '@/components/ui/card'
 import GetPreApproved from '@/components/navigation/GetPreApproved'
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-} from '@/components/ui/table'
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { useFormatPrice as formatPrice } from '@/lib/helpers/formatPrice'
 import { PaymentCalculatorProps } from '@/lib/interfaces/PaymentCalculatorProps'
 import { useEffect, useMemo, useReducer } from 'react'
@@ -26,12 +21,12 @@ const initialState = {
     monthlyPayment: 500,
     totalTaxesAndFees: 500,
     salesTax: 0,
-    fees: 0,
+    fees: 0
 }
 
 type Action = {
-    type: string;
-    payload: any;
+    type: string
+    payload: any
 }
 
 const reducer = (state: any, action: Action) => {
@@ -52,7 +47,7 @@ const reducer = (state: any, action: Action) => {
 }
 
 export default function PaymentHandlerResponse({
-    selectedTab,
+    selectedTab
 }: PaymentCalculatorProps) {
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -80,19 +75,20 @@ export default function PaymentHandlerResponse({
                         }
                         dispatch({
                             type: 'setLoanAmount',
-                            payload: data.paymentsData.loanAmount,
+                            payload: data.paymentsData.loanAmount
                         })
                         dispatch({
                             type: 'setMonthlyPayment',
-                            payload: data.paymentsData.loanMonthlyPaymentWithTaxes,
+                            payload:
+                                data.paymentsData.loanMonthlyPaymentWithTaxes
                         })
                         dispatch({
                             type: 'setTotalTaxesAndFees',
-                            payload: data.paymentsData.totalTaxesAndFees,
+                            payload: data.paymentsData.totalTaxesAndFees
                         })
                         dispatch({
                             type: 'setSalesTax',
-                            payload: data.paymentsData.taxes.combinedSalesTax,
+                            payload: data.paymentsData.taxes.combinedSalesTax
                         })
                         dispatch({
                             type: 'setFees',
@@ -100,40 +96,39 @@ export default function PaymentHandlerResponse({
                         })
                     })
                     .catch((error) =>
-                        console.error('Error fetching payments data', error),
-                    ) 
-
-                    
+                        console.error('Error fetching payments data', error)
+                    )
             }, 500)
         } else {
             router.push('/')
+
             const interest = 0.05
             const calculatedLoanAmount =
                 (watch.vehiclePrice - watch.downPayment - watch.tradeInValue) *
                 (1 + interest)
             const calculatedMonthlyPayment =
                 calculatedLoanAmount / watch.loanTerm
+
             dispatch({
                 type: 'setLoanAmount',
-                payload: calculatedLoanAmount,
+                payload: calculatedLoanAmount
             })
             dispatch({
                 type: 'setMonthlyPayment',
-                payload: calculatedMonthlyPayment,
+                payload: calculatedMonthlyPayment
             })
             dispatch({
                 type: 'setTotalTaxesAndFees',
-                payload: 0,
+                payload: 0
             })
             dispatch({
                 type: 'setSalesTax',
-                payload: 0,
+                payload: 0
             })
             dispatch({
                 type: 'setFees',
-                payload: 0,
+                payload: 0
             })
-
         }
 
         return () => {
@@ -164,13 +159,17 @@ export default function PaymentHandlerResponse({
                             <TableCell className="font-medium">
                                 Loan Amount
                             </TableCell>
-                            <TableCell>{formatPrice(state.loanAmount)}</TableCell>
+                            <TableCell>
+                                {formatPrice(state.loanAmount)}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">
                                 Monthly Payment
                             </TableCell>
-                            <TableCell>{formatPrice(state.monthlyPayment)}</TableCell>
+                            <TableCell>
+                                {formatPrice(state.monthlyPayment)}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">

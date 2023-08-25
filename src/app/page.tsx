@@ -14,18 +14,18 @@ export const metadata: Metadata = {
         images: [
             {
                 url: '/og',
-                alt: 'driv.ly Logo',
-            },
-        ],
+                alt: 'driv.ly Logo'
+            }
+        ]
     },
     twitter: {
         card: 'summary_large_image',
         title: 'driv.ly - Car Payment Calculator',
         description:
             'Budget, qualify and apply within minutes for your perfect car',
-        images: ['/og'],
+        images: ['/og']
     },
-    themeColor: '#ffffff',
+    themeColor: '#ffffff'
 }
 
 export default function Home() {

@@ -25,11 +25,11 @@ const FormSchema = z.object({
     zip: z
         .number()
         .min(5, 'Zip code is required')
-        .max(5, 'Zip code is required'),
+        .max(5, 'Zip code is required')
 })
 
 export default function PaymentHandler({
-    selectedTab,
+    selectedTab
 }: PaymentCalculatorProps) {
     const searchParams = useSearchParams()
     const vin = searchParams.get('vin') ?? undefined
@@ -43,8 +43,8 @@ export default function PaymentHandler({
             tradeInValue: 2000,
             creditScore: 675,
             loanTerm: 36,
-            zip: 98164,
-        },
+            zip: 98164
+        }
     })
 
     return (

@@ -7,8 +7,8 @@ export const alt = 'driv.ly logo'
 const metadata = {
     size: {
         width: 1200,
-        height: 630,
-    },
+        height: 630
+    }
 }
 
 export const contentType = 'image/png'
@@ -24,7 +24,7 @@ export async function GET(params: OptionalParams): Promise<ImageResponse> {
         const { VIN } = params
 
         const vinData = await fetch(`https://specs.vin/${VIN}`).then((res) =>
-            res.json(),
+            res.json()
         )
     }
 
@@ -65,7 +65,7 @@ export async function GET(params: OptionalParams): Promise<ImageResponse> {
             </div>
         ),
         {
-            ...metadata.size,
-        },
+            ...metadata.size
+        }
     )
 }
