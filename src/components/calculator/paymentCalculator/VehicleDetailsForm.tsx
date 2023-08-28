@@ -60,7 +60,7 @@ export default function VehicleDetailsForm() {
     return (
         <Form {...form}>
             <form className="w-full md:w-[400px]">
-                <div className="my-2 space-y-4">
+                <div className="space-y-4">
                     <Card className="w-full">
                         <CardContent className="mt-6">
                             <div>
