@@ -11,16 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
 import { Separator } from '@/components/ui/separator'
-import {
-    CreditCard,
-    CarFront,
-    Gauge,
-    Banknote,
-    Receipt,
-    HeartHandshake,
-    MapPin,
-    CalendarRange
-} from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import {
     Select,
@@ -73,7 +64,6 @@ export default function VehicleDetailsForm() {
                                                 <FormLabel id="vin">
                                                     <div className="flex justify-between">
                                                         <div className="flex items-center">
-                                                            <CarFront className="mr-2" />
                                                             VIN{' '}
                                                         </div>
                                                         <p className="mt-2 flex items-center text-center text-xs text-gray-600">
@@ -102,7 +92,7 @@ export default function VehicleDetailsForm() {
                                                                             }
                                                                             inputMode="numeric"
                                                                             placeholder="98164"
-                                                                            className="w-full bg-muted"
+                                                                            className="w-full bg-[#F0F6FB] "
                                                                             {...form.register(
                                                                                 'zip'
                                                                             )}
@@ -119,7 +109,7 @@ export default function VehicleDetailsForm() {
                                                             type="text"
                                                             id="vin"
                                                             placeholder="3TYSZ5AN8PT104981"
-                                                            className="w-full bg-muted"
+                                                            className="w-full bg-[#F0F6FB]"
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -146,14 +136,13 @@ export default function VehicleDetailsForm() {
                                         <FormItem>
                                             <div className="flex items-center justify-between">
                                                 <FormLabel className="flex items-center font-semibold">
-                                                    <CreditCard className="mr-2" />
                                                     Vehicle Price
                                                 </FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="tel"
                                                         placeholder="10000"
-                                                        className="h-8 w-20 bg-muted"
+                                                        className="h-8 w-20 bg-[#F0F6FB]"
                                                         readOnly
                                                         disabled={
                                                             watch.vin
@@ -208,14 +197,13 @@ export default function VehicleDetailsForm() {
                                     <FormItem>
                                         <div className="flex items-center justify-between">
                                             <FormLabel className="flex items-center font-semibold">
-                                                <HeartHandshake className="mr-2" />
                                                 Down Payment
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="tel"
                                                     placeholder="10000"
-                                                    className="h-8 w-20 bg-muted"
+                                                    className="h-8 w-20 bg-[#F0F6FB]"
                                                     readOnly
                                                     {...field}
                                                 />
@@ -253,14 +241,13 @@ export default function VehicleDetailsForm() {
                                     <FormItem>
                                         <div className="flex items-center justify-between">
                                             <FormLabel className="flex items-center font-semibold">
-                                                <Receipt className="mr-2" />
                                                 Trade In Value
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="tel"
                                                     placeholder="10000"
-                                                    className="h-8 w-20 bg-muted"
+                                                    className="h-8 w-20 bg-[#F0F6FB]"
                                                     readOnly
                                                     {...field}
                                                 />
@@ -301,7 +288,6 @@ export default function VehicleDetailsForm() {
                                         <FormLabel
                                             className="flex items-center font-semibold"
                                             id="loanTerm">
-                                            <CalendarRange className="mr-2" />
                                             Loan Term
                                         </FormLabel>
                                         <FormControl>
@@ -313,7 +299,7 @@ export default function VehicleDetailsForm() {
                                                     )
                                                 }}
                                                 defaultValue={field.value.toString()}>
-                                                <SelectTrigger className="w-full bg-muted">
+                                                <SelectTrigger className="w-full bg-[#F0F6FB]">
                                                     <SelectValue placeholder="Loan Term" />
                                                 </SelectTrigger>
                                                 <SelectContent id="loanTerm">
@@ -352,7 +338,6 @@ export default function VehicleDetailsForm() {
                                         <FormLabel
                                             className="flex items-center font-semibold"
                                             id="creditScore">
-                                            <Gauge className="mr-2" />
                                             Credit Score
                                         </FormLabel>
                                         <FormControl>
@@ -364,7 +349,7 @@ export default function VehicleDetailsForm() {
                                                     )
                                                 }}
                                                 defaultValue={field.value.toString()}>
-                                                <SelectTrigger className="w-full bg-muted">
+                                                <SelectTrigger className="w-full bg-[#F0F6FB]">
                                                     <SelectValue placeholder="Credit Score" />
                                                 </SelectTrigger>
                                                 <SelectContent id="creditScore">

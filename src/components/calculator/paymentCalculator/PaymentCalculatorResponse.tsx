@@ -140,7 +140,7 @@ export default function PaymentHandlerResponse({
 
     return (
         <Card className="w-full md:w-[400px]">
-            <CardHeader className="flex items-center rounded-t-lg bg-zinc-950 text-white">
+            <CardHeader className="flex items-center rounded-t-lg bg-[#16162A] text-white">
                 <CardDescription className="text-white">
                     {selectedTab === 'monthlyPayment'
                         ? 'Estimated Monthly Payment'
@@ -157,19 +157,13 @@ export default function PaymentHandlerResponse({
                     <TableBody>
                         <TableRow>
                             <TableCell className="font-medium">
-                                Loan Amount
+                                Sales Tax
                             </TableCell>
-                            <TableCell>
-                                {formatPrice(state.loanAmount)}
-                            </TableCell>
+                            <TableCell>{formatPrice(state.salesTax)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className="font-medium">
-                                Monthly Payment
-                            </TableCell>
-                            <TableCell>
-                                {formatPrice(state.monthlyPayment)}
-                            </TableCell>
+                            <TableCell className="font-medium">Fees</TableCell>
+                            <TableCell>{formatPrice(state.fees)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium">
@@ -178,16 +172,6 @@ export default function PaymentHandlerResponse({
                             <TableCell>
                                 {formatPrice(state.totalTaxesAndFees)}
                             </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="font-medium">
-                                Sales Tax
-                            </TableCell>
-                            <TableCell>{formatPrice(state.salesTax)}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="font-medium">Fees</TableCell>
-                            <TableCell>{formatPrice(state.fees)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

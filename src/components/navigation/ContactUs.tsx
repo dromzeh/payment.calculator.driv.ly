@@ -10,6 +10,7 @@ export default function ContactUs() {
     return (
         <>
             <Button
+                variant="outline"
                 onClick={() => {
                     window.open(
                         'https://drivly.typeform.com/to/nqwus8kr/',

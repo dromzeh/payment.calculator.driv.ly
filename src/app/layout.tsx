@@ -1,9 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans } from 'next/font/google'
 import Header from '@/components/navigation/Header'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = IBM_Plex_Sans({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700']
+})
 
 export const metadata: Metadata = {
     title: 'driv.ly –– Car Payment Calculator',

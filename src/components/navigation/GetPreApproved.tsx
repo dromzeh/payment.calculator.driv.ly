@@ -15,6 +15,8 @@ export default function GetPreApproved() {
     return (
         <>
             <Button
+                variant="outline"
+                className="bg-[#F5F5F5] py-6"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
                 Get Pre-Approved{' '}

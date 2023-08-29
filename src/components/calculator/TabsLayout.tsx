@@ -12,16 +12,16 @@ export function TabsLayout() {
     return (
         <Tabs defaultValue="monthlyPayment">
             <div className="flex flex-row justify-center">
-                <TabsList className="mb-10 grid w-[400px] grid-cols-2 rounded-lg">
+                <TabsList className="mb-10 grid w-[400px] grid-cols-2 rounded-full bg-[#F0F6FB]">
                     <TabsTrigger
                         value="monthlyPayment"
-                        className="rounded-lg"
+                        className="rounded-full"
                         onClick={() => setSelectedTab('monthlyPayment')}>
                         Monthly Payment
                     </TabsTrigger>
                     <TabsTrigger
                         value="vehiclePrice"
-                        className="rounded-lg"
+                        className="rounded-full"
                         onClick={() => setSelectedTab('vehiclePrice')}>
                         Vehicle Price
                     </TabsTrigger>
