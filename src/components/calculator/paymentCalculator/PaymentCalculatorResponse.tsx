@@ -98,7 +98,7 @@ export default function PaymentHandlerResponse({
                     .catch((error) =>
                         console.error('Error fetching payments data', error)
                     )
-            }, 500)
+            }, 200)
         } else {
             router.push('/')
 

@@ -27,7 +27,9 @@ export function TabsLayout() {
                     </TabsTrigger>
                 </TabsList>
             </div>
-            <PaymentHandler selectedTab={selectedTab} />
+            <div className="mb-10">
+                <PaymentHandler selectedTab={selectedTab} />
+            </div>
         </Tabs>
     )
 }

@@ -1,9 +1,6 @@
 import { ImageResponse } from 'next/server'
 
 export const runtime = 'edge'
-
-export const alt = 'driv.ly logo'
-
 const metadata = {
     size: {
         width: 1200,
@@ -11,23 +8,7 @@ const metadata = {
     }
 }
 
-export const contentType = 'image/png'
-
-interface OptionalParams {
-    VIN?: string
-}
-
-export async function GET(params: OptionalParams): Promise<ImageResponse> {
-    params.VIN = '1G1YY26E385132782'
-
-    if (params.VIN) {
-        const { VIN } = params
-
-        const vinData = await fetch(`https://specs.vin/${VIN}`).then((res) =>
-            res.json()
-        )
-    }
-
+export async function GET() {
     return new ImageResponse(
         (
             <div tw="p-10 justify-center items-center w-full h-full text-black relative flex">
